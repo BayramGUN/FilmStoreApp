@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "qjxaCoYEH6E/JMQLi5mwiN2TEHwYDM7Tm+aMfz56dfzL0cZMtrHx2IyAkfZvMMwHtswPddqInAAIZvAR+KNKkg==",
+  "dgSpecHash": "zNOFRLCvQQepbCvOZBwe97Jz3g31hTMfxAXVFcdC8dz/xY++1R0ynw4ImXyhPuCobeWwtc5ZQoGJ2Z9oXzLQ4Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\bayra\\Desktop\\.Net\\FilmsApi\\FilmsApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\bayra\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\bayra\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\bayra\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\bayra\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.0-preview.2.22153.1\\microsoft.entityframeworkcore.7.0.0-preview.2.22153.1.nupkg.sha512",
     "C:\\Users\\bayra\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.0-preview.2.22153.1\\microsoft.entityframeworkcore.abstractions.7.0.0-preview.2.22153.1.nupkg.sha512",
     "C:\\Users\\bayra\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.0-preview.2.22153.1\\microsoft.entityframeworkcore.analyzers.7.0.0-preview.2.22153.1.nupkg.sha512",

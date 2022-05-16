@@ -39,3 +39,5 @@ C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\Microsoft.Extensions.Primi
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\System.Collections.Immutable.dll
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

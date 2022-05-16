@@ -1,5 +1,11 @@
 using FilmsApi.DBO;
+using FilmsApi.FilmOperations.GetFilms;
+using FilmsApi.FilmOperations.CreateFilm;
+using FilmsApi.FilmOperations.GetFilmDetail;
+using FilmsApi.FilmOperations.UpdateFilm;
+using FilmsApi.FilmOperations.DeleteFilm;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace FilmsApi.Controllers;
 
@@ -9,25 +15,39 @@ namespace FilmsApi.Controllers;
 public class FilmController : ControllerBase
 {
     private readonly FilmsDbContext _context;
-    public FilmController(FilmsDbContext context)
+    private readonly IMapper _mapper;
+    public FilmController(FilmsDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     //Get Method
     [HttpGet]
-    public List<Film> GetFilms()
+    public IActionResult GetFilms()
     {
-        var filmList = _context.Films.OrderBy(ctx => ctx.Id).ToList<Film>();
-        return filmList;
+       GetFilmsQuery query = new GetFilmsQuery(_context, _mapper);
+       var result = query.Handle();
+       return Ok(result);
     }
     //Get method with id
     [HttpGet("{id}")]
-    public Film GetFilm(int id)
+    public IActionResult GetFilm(int id)
     {
-        var film = _context.Films.Where(film => film.Id == id).SingleOrDefault();
+        FilmDetailViewModel result;
+        try
+        {
+            GetFilmDetailQuery query = new GetFilmDetailQuery(_context, _mapper);
+            query.FilmId = id;
+            result = query.Handle();
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        
 
-        return film;
+        return Ok(result);
     }
     /* [HttpGet]
     public Film Get([FromQuery] string id)
@@ -38,41 +58,51 @@ public class FilmController : ControllerBase
     } */
     //Post method
     [HttpPost]
-    public IActionResult AddFilm([FromBody] Film newFilm)
+    public IActionResult AddFilm([FromBody] CreateFilmModel newFilm)
     {
-        var film = _context.Films.SingleOrDefault(ctx => ctx.Title == newFilm.Title);
-        if(film is not null)
-            return BadRequest();
-        _context.Films.Add(newFilm);
-        _context.SaveChanges();
+        try
+        {
+            CreateFilmCommand command = new CreateFilmCommand(_context, _mapper);
+            command.Model = newFilm; 
+            command.Handle();
+        }catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
         return Ok();   
     }
     //Put method
     [HttpPut("{id}")]
-    public IActionResult UpdateFilm(int id, [FromBody] Film updatedFilm)
+    public IActionResult UpdateFilm(int id, [FromBody] UpdateFilmModel updatedFilm)
     {
-        var film = _context.Films.SingleOrDefault(ctx => ctx.Id == updatedFilm.Id);
-        if(film is null)
-            return BadRequest();
-        film.Title = updatedFilm.Title != default ? updatedFilm.Title : film.Title;
-        film.Content = updatedFilm.Content != default ? updatedFilm.Content : film.Content;
-        film.Director = updatedFilm.Director != default ? updatedFilm.Director : film.Director;
-        film.ReleaseDate = updatedFilm.ReleaseDate != default ? updatedFilm.ReleaseDate : film.ReleaseDate;
-        film.IMDB_Point = updatedFilm.IMDB_Point != default ? updatedFilm.IMDB_Point : film.IMDB_Point;
-
-        _context.SaveChanges();
-        
+        try
+        {
+            UpdateFilmCommand command = new UpdateFilmCommand(_context);
+            command.FilmId = id;
+            command.Model = updatedFilm;
+            command.Handle();
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
         return Ok();
     }
     //Delete method
     [HttpDelete("{id}")]
     public IActionResult DeleteFilm(int id)
     {
-        var film = _context.Films.SingleOrDefault(ctx => ctx.Id == id);
-        if(film is null)
-            return BadRequest();
-        _context.Films.Remove(film);
-        _context.SaveChanges();
+        try
+        {
+
+            DeleteFilmCommand command = new DeleteFilmCommand(_context);
+            command.FilmId = id;
+            command.Handle();
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
         return Ok();
     }    
 } 

@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); //Build an "AutoMapper" service configuration 
 builder.Services.AddDbContext<FilmsApi.DBO.FilmsDbContext>(options => 
     options.UseInMemoryDatabase(databaseName:"FilmsDB")
 );
@@ -17,6 +19,7 @@ using(var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     FilmsApi.DBO.DataGenerator.Initialize(services);
 }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
