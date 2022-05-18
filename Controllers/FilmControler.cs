@@ -6,6 +6,8 @@ using FilmsApi.FilmOperations.UpdateFilm;
 using FilmsApi.FilmOperations.DeleteFilm;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using FluentValidation;
+using FilmsApi.FilmOperations.GetFilm;
 
 namespace FilmsApi.Controllers;
 
@@ -39,6 +41,8 @@ public class FilmController : ControllerBase
         {
             GetFilmDetailQuery query = new GetFilmDetailQuery(_context, _mapper);
             query.FilmId = id;
+            GetFilmDetailQueryValidator validator = new GetFilmDetailQueryValidator();
+            validator.ValidateAndThrow(query);
             result = query.Handle();
         }
         catch(Exception ex)
@@ -63,8 +67,12 @@ public class FilmController : ControllerBase
         try
         {
             CreateFilmCommand command = new CreateFilmCommand(_context, _mapper);
-            command.Model = newFilm; 
+            command.Model = newFilm;
+            CreateFilmCommandValidator validator = new CreateFilmCommandValidator();
+            validator.ValidateAndThrow(command); 
+                
             command.Handle();
+               
         }catch(Exception ex)
         {
             return BadRequest(ex.Message);
@@ -80,6 +88,8 @@ public class FilmController : ControllerBase
             UpdateFilmCommand command = new UpdateFilmCommand(_context);
             command.FilmId = id;
             command.Model = updatedFilm;
+            UpdateFilmCommandValidator validator = new UpdateFilmCommandValidator();
+            validator.ValidateAndThrow(command); 
             command.Handle();
         }
         catch(Exception ex)
@@ -97,6 +107,8 @@ public class FilmController : ControllerBase
 
             DeleteFilmCommand command = new DeleteFilmCommand(_context);
             command.FilmId = id;
+            DeleteFilmCommandValidator validator = new DeleteFilmCommandValidator();
+            validator.ValidateAndThrow(command);
             command.Handle();
         }
         catch(Exception ex)

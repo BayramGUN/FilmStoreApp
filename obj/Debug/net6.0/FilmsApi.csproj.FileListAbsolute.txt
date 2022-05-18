@@ -41,3 +41,4 @@ C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\System.Diagnostics.Diagnos
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\bayra\Desktop\.Net\FilmsApi\bin\Debug\net6.0\FluentValidation.dll
