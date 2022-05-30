@@ -5,6 +5,7 @@ using AutoMapper;
 using FilmsApi.Application.UserOperations.Commands.CreateUser;
 using FilmsApi.Application.UserOperations.Commands.CreateToken;
 using FilmsApi.TokenOperations.Models;
+using FilmsApi.Application.UserOperations.Commands.RefreshToken;
 
 namespace FilmsApi.Controllers;
 
@@ -38,5 +39,13 @@ public class UserController : ControllerBase
         command.Model = login;
         var token = command.Handle();
         return token;
+    }  
+    [HttpGet("refreshToken")]
+    public ActionResult<Token> RefreshToken([FromQuery] string token)
+    {
+        RefreshTokenCommand command = new RefreshTokenCommand(_context, _mapper, _configuration);
+        command.RefreshToken = token;
+        var resultToken = command.Handle();
+        return resultToken;
     }  
 }
