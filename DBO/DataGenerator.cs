@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using FilmsApi.Entities;
 namespace FilmsApi.DBO;
 
 public class DataGenerator

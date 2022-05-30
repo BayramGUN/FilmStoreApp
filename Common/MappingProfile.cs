@@ -1,7 +1,9 @@
 using AutoMapper;
-using FilmsApi.FilmOperations.CreateFilm;
-using FilmsApi.FilmOperations.GetFilmDetail;
-using FilmsApi.FilmOperations.GetFilms;
+using FilmsApi.Entities;
+using FilmsApi.Application.FilmOperations.CreateFilm;
+using FilmsApi.Application.FilmOperations.GetFilmDetail;
+using FilmsApi.Application.FilmOperations.GetFilms;
+using FilmsApi.Application.UserOperations.Commands.CreateUser;
 
 namespace FilmsApi.Common;
 
@@ -18,5 +20,6 @@ public class MappingProfile : Profile
                                             dest => dest.Director, 
                                             opt => opt.MapFrom(src => ((DirectorEnum)src.DirectorID).ToString())
                                         );
+        CreateMap<CreateUserModel, User>();
     }
 }
